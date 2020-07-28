@@ -1,8 +1,8 @@
 from django.conf.urls import url
 from waterfall import views
-from waterfall import image_searchview
+from waterfall import searchview
 
 urlpatterns = [
     url('imgs', views.image_list),
-    url('search', image_searchview.search_keywords),
+    url('search', searchview.search_keywords),
 ]
