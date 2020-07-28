@@ -11,7 +11,7 @@ class Waterfall(models.Model):
     type = models.CharField(max_length=10)
 
     class Meta:
-        verbose_name = '图片瀑布'
+        verbose_name = 'Gallery'
         db_table = 'Waterfall_image'
 
     def __str__(self):

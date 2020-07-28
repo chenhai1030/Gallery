@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'haystack',
     'waterfall.apps.WaterfallConfig',
     'django_apscheduler',
 ]
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'Gallery.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['frontend/dist'],
+        'DIRS': ['frontend/dist', os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,6 +76,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Gallery.wsgi.application'
 
+# haystack
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'waterfall.whoosh_cn_backen.WhooshEngine',
+        # rebuild_index
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+        'INCLUDE_SPELLING': True,
+    },
+}
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 4
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

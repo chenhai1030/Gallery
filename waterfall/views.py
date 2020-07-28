@@ -22,7 +22,7 @@ try:
     # 设置定时任务，选择方式为interval，时间间隔为1s
     # 另一种方式为每天固定时间执行任务，对应代码为：
     # @register_job(scheduler, 'cron', day_of_week='mon-fri', hour='9', minute='30', second='10',id='task_time')
-    @register_job(scheduler, "interval", seconds=700)
+    @register_job(scheduler, "interval", seconds=10)
     def update_image_database():
         path = os.path.join(settings.MEDIA_ROOT, "img")
         for filename in os.listdir(path):
