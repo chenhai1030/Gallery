@@ -27,4 +27,4 @@ class WaterfallSerializer(serializers.HyperlinkedModelSerializer):
     #     return instance
     class Meta:
         model = Waterfall
-        fields = ('id', 'img_name', 'create_time', 'src', 'style', 'type')
+        fields = ('id', 'imgName', 'createTime', 'dimensions', 'size', 'imgUrl', 'style', 'type')

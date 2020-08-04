@@ -2,6 +2,7 @@
  import Router from 'vue-router'
  import Images from '@/components/Images'
  import Search from '@/components/search-panel'
+ import Home   from '@/components/Home'
 
  Vue.use(Router)
 
@@ -13,9 +14,14 @@
       component: Images
     },
     {
-      path: '/',
+      path: '/search',
       name: 'search',
       component: Search
-    }
+    },
+    {
+      path: '/',
+      name: 'home',
+      component: Home
+    },
   ]
 })

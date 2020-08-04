@@ -68,16 +68,18 @@ def search_keywords(request, load_all=True, form_class=ModelSearchForm, searchqu
         context.update(extra_context)
 
     jsondata = []
-    print(len(page.object_list))
+    # print(len(page.object_list))
     for result in page.object_list:
         data = {
-            'img_name': result.object.img_name,
-            'src': result.object.src,
-            # 'create_time': result.object.create_time,
+            'imgName': result.object.imgName,
+            'imgUrl': result.object.imgUrl,
+            'dimensions': result.object.dimensions,
+            'size': result.object.size,
+            # 'createTime': result.object.createTime,
             'style': result.object.style,
             'type': result.object.type
         }
-        print(data)
+        # print(data)
         jsondata.append(data)
     result = {"code": 200, "msg": 'Search successfully！', "data": jsondata}
     return HttpResponse(json.dumps(result), content_type="application/json")

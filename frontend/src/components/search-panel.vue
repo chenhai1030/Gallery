@@ -16,7 +16,9 @@
         </transition-group>
       </div>
     </div>
+
   </div>
+
 </template>
 
 <script>
@@ -29,8 +31,8 @@
           now: -1, // 指向当前词条列表里的第几个
           searchIndex: 0, // 用什么引擎搜索
           logoData: [{
-            name: 'google',
-            searchSrc: 'https://google.com'
+            name: 'funtv',
+            searchSrc: 'api/search/?q='
           },
           {
             name: 'baidu',
@@ -40,9 +42,9 @@
       },
         methods: {
     // 切换搜索引擎
-    getIndex: function (index) {
-      this.searchIndex = index
-    },
+    // getIndex: function (index) {
+    //   this.searchIndex = index
+    // },
     // 按下键盘抬起手时
     get: function (e) {
       if (e.keyCode === 38 || e.keyCode === 40) {

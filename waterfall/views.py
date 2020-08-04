@@ -10,6 +10,7 @@ from waterfall.serializers import WaterfallSerializer
 from apscheduler.schedulers.background import BackgroundScheduler
 from django_apscheduler.jobstores import DjangoJobStore, register_events, register_job
 
+from PIL import Image
 
 import os
 
@@ -26,19 +27,45 @@ try:
     def update_image_database():
         path = os.path.join(settings.MEDIA_ROOT, "img")
         for filename in os.listdir(path):
-            # print(os.path.join(path, filename))
             # print(filename)
-            waterfall = Waterfall(img_name=filename, src=os.path.join('media/img/', filename))
+            filepath = os.path.join('media/img/', filename)
+            im = Image.open(filepath)
+            w, h = im.size
+            filesize = os.path.getsize(filepath)
+            waterfall = Waterfall(imgName=filename, imgUrl=filepath, size=formatSize(filesize),
+                                  dimensions=str(w) + " X " + str(h))
             try:
                 waterfall.save()
             except Exception as e:
                 pass
+
 
     register_events(scheduler)
     scheduler.start()
 except Exception as e:
     print(e)
     scheduler.shutdown()
+
+
+# byte to kb\m\g
+def formatSize(byte):
+    try:
+        byte = float(byte)
+        kb = byte / 1024
+    except Exception as e:
+        print("Wrong format")
+        print(e)
+        return "Error"
+
+    if kb >= 1024:
+        M = kb / 1024
+        if M >= 1024:
+            G = M / 1024
+            return "%dG" % G
+        else:
+            return "%dM" % M
+    else:
+        return "%dK" % kb
 
 
 class JSONResponse(HttpResponse):
